@@ -67,7 +67,7 @@ attribID:#(0x4ecfe9a2, 0x6db18619)
 	)
 	 
 	rollout params "Gta Object" (
-		spinner spn_type "ID" type:#integer range:[0,10000,0]
+		spinner spn_type "ID" type:#integer range:[0,32767,0]
 		checkbox chk_instance "Instance only"
 		edittext edt_txd "TXD"
 		spinner spn_dist "LOD distance" type:#integer range:[0,10000,100]

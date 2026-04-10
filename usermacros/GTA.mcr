@@ -33,6 +33,20 @@ macroScript MakeAttractor
 	::MakeAttractor $selection
 )
 
+macroScript MakeCullZone
+	category:"GTA"
+	toolTip:"Define cullzone"
+(
+	::MakeCullZone $selection
+)
+
+macroScript MakeZone
+	category:"GTA"
+	toolTip:"Define zone"
+(
+	::MakeZone $selection
+)
+
 macroScript UndefGTA
 	category:"GTA"
 	toolTip:"Undefine gta object"
@@ -46,6 +60,15 @@ macroScript PrintIDE
 (
 	out = StringStream ""
 	::printDefinitions out
+	format "%" (out as string)
+)
+
+macroScript PrintPaths
+	category:"GTA"
+	toolTip:"Print paths"
+(
+	out = StringStream ""
+	::printPaths out
 	format "%" (out as string)
 )
 

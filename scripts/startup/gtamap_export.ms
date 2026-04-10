@@ -401,10 +401,45 @@ fn printDeflist list out = (
 	OK
 )
 
+fn printPathlist list out = (
+	format "path\n" to:out
+	for obj in list do (
+		ncar = 0
+		nped = 0
+		segs = FindPathSegments obj
+		for seg in segs do (
+			if seg.type == 1 then (
+				if nped > 0 do (
+					format "WARNING: skipping extra ped paths on object '%'\n" obj.name
+					continue
+				)
+				nped += 1
+			) else if seg.type == 2 then (
+				if ncar > 0 do (
+					format "WARNING: skipping extra car paths on object '%'\n" obj.name
+					continue
+				)
+				ncar += 1
+			)
+			lines = MakePathLines seg
+			if lines != undefined do
+				for l in lines do
+					format "%\n" l to:out
+		)
+	)
+	format "end\n" to:out
+)
+
 fn printDefinitions out = (
 	objs = for obj in objects where (IsObjectDefinition obj) and (GetSubObjNum obj.name) == 0 collect obj
 	qsort objs cmpid
 	printDeflist objs out
+)
+
+fn printPaths out = (
+	objs = for obj in objects where (IsObjectDefinition obj) and (GetSubObjNum obj.name) == 0 collect obj
+	qsort objs cmpid
+	printPathlist objs out
 )
 
 fn saveIDE filename = (
